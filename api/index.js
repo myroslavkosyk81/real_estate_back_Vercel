@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('server is running!')
 });
 
