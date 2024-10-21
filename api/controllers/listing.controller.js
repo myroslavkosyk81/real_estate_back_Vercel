@@ -65,7 +65,7 @@ export const getListing = async (req, res, next) => {
         if (!listing) {
             return  next(errorHandler(404, "No listing with that ID exists"));
         }
-        res.status(200).json(listing);
+        res.status(200).json({message: 'listing roure is working'});
     } catch (error) {
         next(error);
     }
