@@ -7,6 +7,11 @@ import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
 // import path from 'path';
 dotenv.config();
+import cors from 'cors';
+
+const allowedOrigins = ['http://localhost:5173', 'https://real-estate-front-vercel.vercel.app'];
+
+
 
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('mongoDB connected');
@@ -17,6 +22,20 @@ mongoose.connect(process.env.MONGO).then(() => {
 // const __dirname = path.resolve();
 
 const app = express();
+app.use(cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
+  }));
+app.use((req, res, next) => {
+    console.log('Request Origin:', req.headers.origin);
+    next();
+  });
+
 app.use(express.json());
 app.use(cookieParser());
 
