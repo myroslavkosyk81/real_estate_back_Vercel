@@ -22,6 +22,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 // const __dirname = path.resolve();
 
 const app = express();
+app.use(cookieParser());
 app.use(cors({
     origin: (origin, callback) => {
       if (allowedOrigins.includes(origin) || !origin) {
@@ -29,7 +30,8 @@ app.use(cors({
       } else {
         callback(new Error('Not allowed by CORS'));
       }
-    }
+    },
+    credentials: true
   }));
 app.use((req, res, next) => {
     console.log('Request Origin:', req.headers.origin);
