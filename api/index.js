@@ -41,7 +41,7 @@ app.use(cors({
 //         callback(new Error('Not allowed by CORS'));
 //       }
 //     },
-//     credentials: true,
+//     credentials: true
 //   }));
 app.use((req, res, next) => {
     console.log('Request Origin:', req.headers.origin);
