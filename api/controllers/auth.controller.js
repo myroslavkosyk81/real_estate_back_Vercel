@@ -26,23 +26,10 @@ export const signin = async (req, res, next) => {
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
         // console.log(token)
         const { password: pass, ...rest } = validUser._doc;
-        // res
-        //     .cookie('access_token', token, { httpOnly: true})
-        //     .status(200)
-        //     .json(rest);
-
-            res.cookie('access_token', token, {
-                httpOnly: true, // To prevent client-side JavaScript from accessing it
-                secure: process.env.NODE_ENV === 'production', // Set `true` in production for HTTPS
-                sameSite: 'None', // Required for cross-origin cookies
-                maxAge: 24 * 60 * 60 * 1000, // Optional: Set cookie expiration time
-              }).status(200)
-              .json(rest);
-            
-        // res
-        //     .cookie('access_token', token, { httpOnly: true})
-        //     .status(200)
-        //     .json(rest);
+        res
+            .cookie('access_token', token, { httpOnly: true})
+            .status(200)
+            .json(rest);
         console.log(res)
     } catch (error) {
         next(error);
